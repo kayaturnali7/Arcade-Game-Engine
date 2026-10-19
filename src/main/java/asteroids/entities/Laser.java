@@ -12,7 +12,6 @@ import java.awt.Color;
 public class Laser extends Entity{
     private static final int SIZE = 2;
     private static final double LIFE_TIME = 0.6;
-    private static final Color COLOR = Color.WHITE;
 
     private int lifeTick = 0;
 
@@ -34,7 +33,7 @@ public class Laser extends Entity{
 
     @Override
     protected Shape shapeInit() {
-        return new Circle(SIZE, 16, COLOR);
+        return new Circle(SIZE, 16, Color.white);
     }
 
 
