@@ -16,7 +16,6 @@ import java.awt.event.KeyEvent;
 
 public class Player extends Entity {
     private static final File FIRE_SFX = new File("src\\main\\java\\asteroids\\sounds\\fire.wav");
-    private static final File THRUST_SFX = new File("src\\main\\java\\asteroids\\sounds\\thrust.wav");
 
     private static final double SHOOT_COOLDOWN = 0.25;
     private static final int ROTATION_SPEED = 4;
@@ -74,7 +73,6 @@ public class Player extends Entity {
 
     private void applyThrust(){
         applyForce(direction,THRUST);
-        scene.playSound(THRUST_SFX);
     }
 
     private void updateCooldown(){
@@ -96,6 +94,11 @@ public class Player extends Entity {
 
     @Override
     public void onCollision(Actor actor) {
+
+    }
+
+    @Override
+    public void onDestroy() {
 
     }
 }

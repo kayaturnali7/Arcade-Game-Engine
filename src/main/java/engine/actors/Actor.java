@@ -34,12 +34,14 @@ public abstract class Actor {
     protected abstract Shape shapeInit();
     protected abstract void onUpdate();
     public abstract void onCollision(Actor actor);
+    protected abstract void onDestroy();
 
     public boolean isActive(){
         return active;
     }
 
     public void destroy(){
+        onDestroy();
         active = false;
     }
 

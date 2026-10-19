@@ -45,4 +45,9 @@ public class Laser extends Entity{
             actor.destroy();
         }
     }
+
+    @Override
+    public void onDestroy() {
+
+    }
 }

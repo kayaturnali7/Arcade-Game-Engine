@@ -30,4 +30,9 @@ public class TestEntity extends Entity {
     public void onCollision(Actor actor) {
         
     }
+
+    @Override
+    public void onDestroy() {
+        System.out.println(this + " destroyed");
+    }
 }
