@@ -1,6 +1,8 @@
 package engine.util;
 
-public class VectorMath {
+public final class VectorMath {
+
+    private VectorMath(){}
 
     public static double rotationX(double initialX, double initialY, double cos, double sin){
         return initialX * cos - initialY * sin;

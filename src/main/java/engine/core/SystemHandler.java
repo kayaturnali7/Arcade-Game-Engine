@@ -1,5 +1,6 @@
 package engine.core;
 
+import engine.audio.SoundSystem;
 import engine.physics.PhysicsSystem;
 import engine.render.RenderSystem;
 import engine.scene.Scene;
@@ -11,6 +12,7 @@ import java.util.Map;
 public class SystemHandler {
     private final PhysicsSystem physicsSystem = new PhysicsSystem();
     private final RenderSystem renderSystem = new RenderSystem();
+    private final SoundSystem audioSystem = new SoundSystem();
 
     private final Map<String, Scene> scenes = new HashMap<>();
     private Scene currentScene;

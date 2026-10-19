@@ -12,7 +12,8 @@ public class Shape {
     public final int[] verticesX;
     public final int[] verticesY;
 
-    private final Color color;
+    private Color color;
+    private Color outlineColor;
 
     public final AABB AABB = new AABB();
 

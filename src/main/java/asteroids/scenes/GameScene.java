@@ -29,7 +29,7 @@ public class GameScene extends Scene {
         player.moveTo(dimension.width/2, dimension.height/2);
 
         testEntity = new TestEntity(this, "Test Entity");
-        testEntity.moveTo(dimension.width/2, dimension.height/2);
+        testEntity.moveTo(200, 200);
 
         instantiate(player);
         instantiate(testEntity);

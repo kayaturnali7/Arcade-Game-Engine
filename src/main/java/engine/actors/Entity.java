@@ -44,4 +44,3 @@ public abstract class Entity extends Actor {
         velocity.set(v);
     }
 }
-

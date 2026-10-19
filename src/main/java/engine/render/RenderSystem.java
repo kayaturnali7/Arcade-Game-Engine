@@ -20,7 +20,7 @@ public class RenderSystem {
 
             drawShape(g2d, shape);
             AABB aabb = shape.AABB;
-            drawAABB(g2d, aabb);
+            //drawAABB(g2d, aabb);
         }
     }
 

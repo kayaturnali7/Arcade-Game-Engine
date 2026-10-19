@@ -9,16 +9,19 @@ import engine.actors.Entity;
 import engine.geometry.Shape;
 import engine.geometry.ConvexPolygon;
 import engine.core.Engine;
+import java.io.File;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
 public class Player extends Entity {
+    private static final File FIRE_SFX = new File("src\\main\\java\\asteroids\\sounds\\fire.wav");
+    private static final File THRUST_SFX = new File("src\\main\\java\\asteroids\\sounds\\thrust.wav");
+
     private static final double SHOOT_COOLDOWN = 0.25;
     private static final int ROTATION_SPEED = 4;
     private static final double THRUST = 0.17;
     
-
     private double cooldownTick = 0;
     private boolean firing = false;
     private boolean canFire = false;
@@ -71,6 +74,7 @@ public class Player extends Entity {
 
     private void applyThrust(){
         applyForce(direction,THRUST);
+        scene.playSound(THRUST_SFX);
     }
 
     private void updateCooldown(){
@@ -81,8 +85,13 @@ public class Player extends Entity {
         canFire = firing && cooldownTick == 0;
     }
 
-    private void fireLaser(){
+    private void fireLaser() {
         cooldownTick = SHOOT_COOLDOWN * Engine.FPS;
+
+        Vector2 vertex = shape.getVertex(0);
+        scene.instantiate(new Laser(scene, vertex.x, vertex.y, direction));
+        scene.playSound(FIRE_SFX);
+
     }
 
     @Override

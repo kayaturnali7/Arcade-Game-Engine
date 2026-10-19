@@ -2,11 +2,20 @@ package engine.scene;
 
 import engine.actors.Actor;
 import engine.actors.Entity;
+import engine.audio.SoundSystem;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Arrays;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import java.awt.Dimension;
+import java.io.File;
+import java.io.IOException;
 
 public abstract class Scene {
 
@@ -58,6 +67,18 @@ public abstract class Scene {
         pendingActors.add(actor);
         if (actor instanceof Entity){
             pendingEntities.add((Entity) actor);
+        }
+    }
+
+    public void playSound(File sfx){
+         try {
+            SoundSystem.playSoundFile(sfx);
+        } catch (UnsupportedAudioFileException e) {
+            System.out.println("Audio file not supported: " + e);
+        } catch (IOException e) {
+            System.out.println("IOException: " + e);
+        } catch (LineUnavailableException e) {
+            System.out.println("LineUnavailableException: " + e);
         }
     }
 

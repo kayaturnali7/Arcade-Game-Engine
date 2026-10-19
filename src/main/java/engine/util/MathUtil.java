@@ -2,7 +2,10 @@ package engine.util;
 
 import engine.data.Vector2;
 
-public class MathUtil {
+public final class MathUtil {
+
+    private MathUtil(){}
+
     public static double pythagorean(double a, double b) {
         return Math.sqrt(a * a + b * b);
     }

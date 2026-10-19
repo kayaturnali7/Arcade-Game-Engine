@@ -2,8 +2,10 @@ package engine.util;
 
 import engine.data.Vector2;
 
-public class GeometryUtil {
+public final class GeometryUtil {
 
+    private GeometryUtil(){}
+    
     public static Vector2 minimumVertex(int[] verticesX, int[] verticesY){
         int minX = verticesX[0];
         int minY = verticesY[0];

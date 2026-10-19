@@ -1,5 +1,6 @@
 package asteroids.entities;
 
+import engine.actors.Entity;
 import engine.actors.Actor;
 import engine.geometry.Circle;
 import engine.scene.Scene;
@@ -8,15 +9,17 @@ import engine.core.Engine;
 
 import java.awt.Color;
 
-public class Laser extends Actor{
+public class Laser extends Entity{
     private static final int SIZE = 2;
     private static final double LIFE_TIME = 0.6;
     private static final Color COLOR = Color.WHITE;
 
     private int lifeTick = 0;
 
-    public Laser(Scene scene, double x, double y, double direction, int index){
+    public Laser(Scene scene, double x, double y, double direction){
         super(scene, "laser");
+        moveTo(x,y);
+        setVelocity(direction, 20);
     }
 
     @Override
@@ -37,6 +40,9 @@ public class Laser extends Actor{
 
     @Override
     public void onCollision(Actor actor) {
-
+        if (actor instanceof Entity) {
+            this.destroy();
+            actor.destroy();
+        }
     }
 }
