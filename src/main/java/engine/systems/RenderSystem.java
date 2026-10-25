@@ -1,9 +1,8 @@
-package engine.render;
+package engine.systems;
 
 import engine.actors.Actor;
 import engine.geometry.Shape;
 import engine.geometry.AABB;
-import engine.scene.Scene;
 
 import java.awt.Color;
 import java.awt.Graphics2D;

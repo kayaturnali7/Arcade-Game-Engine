@@ -1,17 +1,18 @@
-package engine.scene;
+package engine.systems;
 
 import engine.actors.Actor;
 import engine.actors.Entity;
-import engine.audio.SoundSystem;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+
 
 import java.awt.Dimension;
 import java.io.File;
@@ -29,9 +30,16 @@ public abstract class Scene {
     protected final ArrayList<Entity> entities = new ArrayList<>();
     private final ArrayList<Entity> pendingEntities = new ArrayList<>();
 
+    protected final HashMap<String, Integer> soundEffects = new HashMap<>();
+
+    private final ArrayList<AudioInputStream> audioStreams = new ArrayList<>();
+    private final ArrayList<Clip> clips = new ArrayList<>();
+
     public Scene(){
         initialize();
         onStart();
+
+
         updateLists();
     }
 
@@ -70,9 +78,17 @@ public abstract class Scene {
         }
     }
 
-    public void playSound(File sfx){
-         try {
-            SoundSystem.playSoundFile(sfx);
+    protected void addAudio(File file) {
+        try {
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+            Clip clip = AudioSystem.getClip();
+            
+            audioStreams.add(audioStream);
+            clips.add(clip);
+
+            int index = soundEffects.size();
+            soundEffects.put(file.toString(), index);
+
         } catch (UnsupportedAudioFileException e) {
             System.out.println("Audio file not supported: " + e);
         } catch (IOException e) {
@@ -80,6 +96,30 @@ public abstract class Scene {
         } catch (LineUnavailableException e) {
             System.out.println("LineUnavailableException: " + e);
         }
+
+        
+    }
+
+    public void playSound(String tag){
+        int index = soundEffects.get(tag);
+        AudioInputStream audioStream = audioStreams.get(index);
+        Clip clip = clips.get(index);
+        
+        try {
+            
+
+            clip.open(audioStream);
+            clip.start();
+        } catch (IOException e) {
+            System.out.println("IOException: " + e);
+        } catch (LineUnavailableException e) {
+            System.out.println("LineUnavailableException: " + e);
+        }
+
+        
+        
+        
+        
     }
 
     public ArrayList<Actor> getActors(){return actors;}

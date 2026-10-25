@@ -1,7 +1,7 @@
 package asteroids;
 
 import engine.core.Engine;
-import engine.scene.Scene;
+import engine.systems.Scene;
 import asteroids.scenes.*;
 
 public class AsteroidsGame {

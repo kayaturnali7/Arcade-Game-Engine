@@ -1,8 +1,9 @@
 package engine.core;
 
-import engine.scene.Scene;
-
 import javax.swing.JFrame;
+
+import engine.systems.Scene;
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;

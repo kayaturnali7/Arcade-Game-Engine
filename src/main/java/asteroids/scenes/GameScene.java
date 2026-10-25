@@ -1,14 +1,17 @@
 package asteroids.scenes;
 
 import engine.actors.Entity;
-import engine.scene.Scene;
-
+import engine.systems.Scene;
 // Let these be wildcard imports
 import asteroids.entities.*;
 
 import java.awt.Color;
+import java.io.File;
 
 public class GameScene extends Scene {
+     private static final File SHOOT_SOUND = new File("src\\main\\java\\asteroids\\sounds\\fire.wav");
+
+
 
     private final double DRAG = 0.97;
 
@@ -20,6 +23,8 @@ public class GameScene extends Scene {
         setTitle("Asteroid Remake");
         setDimension(900,600);
         setBgColor(Color.BLACK);
+
+        addAudio(SHOOT_SOUND, "shoot");        
     }
 
     @Override
@@ -39,6 +44,5 @@ public class GameScene extends Scene {
     @Override
     protected void onUpdate() {
         player.velocity.scale(DRAG);
-        testEntity.velocity.scale(DRAG);
     }
 }

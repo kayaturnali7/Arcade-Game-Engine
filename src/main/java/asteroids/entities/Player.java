@@ -4,9 +4,9 @@ import engine.actors.Actor;
 import engine.core.InputHandler;
 
 import engine.data.Vector2;
-import engine.scene.Scene;
 import engine.actors.Entity;
 import engine.geometry.Shape;
+import engine.systems.Scene;
 import engine.geometry.ConvexPolygon;
 import engine.core.Engine;
 import java.io.File;
@@ -15,8 +15,7 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 
 public class Player extends Entity {
-    private static final File FIRE_SFX = new File("src\\main\\java\\asteroids\\sounds\\fire.wav");
-
+   
     private static final double SHOOT_COOLDOWN = 0.25;
     private static final int ROTATION_SPEED = 4;
     private static final double THRUST = 0.17;
@@ -88,7 +87,7 @@ public class Player extends Entity {
 
         Vector2 vertex = shape.getVertex(0);
         scene.instantiate(new Laser(scene, vertex.x, vertex.y, direction));
-        scene.playSound(FIRE_SFX);
+        scene.playSound("shoot");
 
     }
 

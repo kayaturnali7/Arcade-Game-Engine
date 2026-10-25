@@ -4,7 +4,7 @@ import engine.actors.Actor;
 import engine.actors.Entity;
 import engine.geometry.Circle;
 import engine.geometry.Shape;
-import engine.scene.Scene;
+import engine.systems.Scene;
 
 import java.awt.Color;
 

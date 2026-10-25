@@ -3,8 +3,8 @@ package asteroids.entities;
 import engine.actors.Entity;
 import engine.actors.Actor;
 import engine.geometry.Circle;
-import engine.scene.Scene;
 import engine.geometry.Shape;
+import engine.systems.Scene;
 import engine.core.Engine;
 
 import java.awt.Color;

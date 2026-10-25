@@ -1,7 +1,7 @@
 package engine.actors;
 
 import engine.geometry.Shape;
-import engine.scene.Scene;
+import engine.systems.Scene;
 import engine.data.Vector2;
 
 public abstract class Actor {

@@ -1,9 +1,8 @@
-package engine.physics;
+package engine.systems;
 
 import engine.actors.Actor;
 import engine.geometry.AABB;
 import engine.geometry.Shape;
-import engine.scene.Scene;
 import engine.util.MathUtil;
 
 import java.util.ArrayList;

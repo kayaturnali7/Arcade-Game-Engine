@@ -1,6 +1,6 @@
 package asteroids.scenes;
 
-import engine.scene.Scene;
+import engine.systems.Scene;
 
 public class MenuScene extends Scene {
 

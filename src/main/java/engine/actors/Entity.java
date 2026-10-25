@@ -1,7 +1,7 @@
 package engine.actors;
 
 import engine.data.Vector2;
-import engine.scene.Scene;
+import engine.systems.Scene;
 
 public abstract class Entity extends Actor {
 

@@ -1,9 +1,9 @@
 package engine.core;
 
-import engine.audio.SoundSystem;
-import engine.physics.PhysicsSystem;
-import engine.render.RenderSystem;
-import engine.scene.Scene;
+import engine.systems.PhysicsSystem;
+import engine.systems.RenderSystem;
+import engine.systems.Scene;
+import engine.systems.SoundSystem;
 
 import java.awt.Graphics2D;
 import java.util.HashMap;
