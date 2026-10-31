@@ -5,18 +5,13 @@ import engine.actors.Entity;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.io.IOException;
+import java.util.stream.Stream;
 import javax.sound.sampled.Clip;
 
-
 import java.awt.Dimension;
-import java.io.File;
-import java.io.IOException;
 
 public abstract class Scene {
 
@@ -30,16 +25,10 @@ public abstract class Scene {
     protected final ArrayList<Entity> entities = new ArrayList<>();
     private final ArrayList<Entity> pendingEntities = new ArrayList<>();
 
-    protected final HashMap<String, Integer> soundEffects = new HashMap<>();
-
-    private final ArrayList<AudioInputStream> audioStreams = new ArrayList<>();
-    private final ArrayList<Clip> clips = new ArrayList<>();
 
     public Scene(){
         initialize();
         onStart();
-
-
         updateLists();
     }
 
@@ -78,50 +67,23 @@ public abstract class Scene {
         }
     }
 
-    protected void addAudio(File file) {
-        try {
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-            Clip clip = AudioSystem.getClip();
-            
-            audioStreams.add(audioStream);
-            clips.add(clip);
 
-            int index = soundEffects.size();
-            soundEffects.put(file.toString(), index);
-
-        } catch (UnsupportedAudioFileException e) {
-            System.out.println("Audio file not supported: " + e);
+    protected void loadAudioFiles(Path path) {
+        try (Stream<Path> paths = Files.walk(path)) {
+            paths.filter(Files::isRegularFile).forEach(file -> SoundSystem.addAudioFile(file.toFile()));
         } catch (IOException e) {
-            System.out.println("IOException: " + e);
-        } catch (LineUnavailableException e) {
-            System.out.println("LineUnavailableException: " + e);
+            e.printStackTrace();
         }
-
-        
     }
 
-    public void playSound(String tag){
-        int index = soundEffects.get(tag);
-        AudioInputStream audioStream = audioStreams.get(index);
-        Clip clip = clips.get(index);
-        
-        try {
-            
 
-            clip.open(audioStream);
-            clip.start();
-        } catch (IOException e) {
-            System.out.println("IOException: " + e);
-        } catch (LineUnavailableException e) {
-            System.out.println("LineUnavailableException: " + e);
-        }
-
-        
-        
-        
-        
+    public void playSound(String sound) {
+        SoundSystem.playSound(sound);
     }
 
+    public Clip getSound(String sound) {
+        return SoundSystem.getSound(sound);
+    }
     public ArrayList<Actor> getActors(){return actors;}
 
     public ArrayList<Entity> getEntities(){return entities;}

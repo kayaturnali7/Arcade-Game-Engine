@@ -6,13 +6,9 @@ import engine.systems.Scene;
 import asteroids.entities.*;
 
 import java.awt.Color;
-import java.io.File;
+import java.nio.file.Paths;
 
 public class GameScene extends Scene {
-     private static final File SHOOT_SOUND = new File("src\\main\\java\\asteroids\\sounds\\fire.wav");
-
-
-
     private final double DRAG = 0.97;
 
     private Entity player;
@@ -20,16 +16,14 @@ public class GameScene extends Scene {
 
     @Override
     protected void initialize() {
+        loadAudioFiles(Paths.get("src/main/java/asteroids/sounds")); 
         setTitle("Asteroid Remake");
         setDimension(900,600);
         setBgColor(Color.BLACK);
-
-        addAudio(SHOOT_SOUND, "shoot");        
     }
 
     @Override
     protected void onStart() {
-
         player = new Player(this);
         player.moveTo(dimension.width/2, dimension.height/2);
 
