@@ -1,8 +1,10 @@
 package asteroids.scenes;
 
 import engine.actors.Entity;
+import engine.core.Engine;
 import engine.systems.Scene;
-// Let these be wildcard imports
+
+// Let this be wildcard imports
 import asteroids.entities.*;
 
 import java.awt.Color;
@@ -37,6 +39,8 @@ public class GameScene extends Scene {
 
     @Override
     protected void onUpdate() {
+        setTitle("Asteroid Remake " + Engine.CURRENT_FPS);
+
         player.velocity.scale(DRAG);
     }
 }

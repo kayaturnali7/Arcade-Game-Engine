@@ -10,7 +10,7 @@ import engine.core.Engine;
 import java.awt.Color;
 
 public class Laser extends Entity{
-    private static final int SIZE = 2;
+    private static final int SIZE = 3;
     private static final double LIFE_TIME = 0.6;
 
     private int lifeTick = 0;
@@ -24,6 +24,7 @@ public class Laser extends Entity{
     @Override
     protected void onUpdate() {
         double lifeTimeFrames = LIFE_TIME * Engine.FPS;
+
         if (lifeTick >= lifeTimeFrames){
             destroy();
         } else{
@@ -39,8 +40,8 @@ public class Laser extends Entity{
 
     @Override
     public void onCollision(Actor actor) {
-        if (actor instanceof Entity) {
-            this.destroy();
+        if (actor instanceof Entity && actor.getName() != "Test Entity") {
+            destroy();
             actor.destroy();
         }
     }

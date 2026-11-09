@@ -13,7 +13,9 @@ import java.awt.image.BufferStrategy;
 
 public class Engine extends Canvas implements Runnable {
 
+    public static int CURRENT_FPS;
     public static final int FPS = 60;
+    
 
     private final InputHandler inputHandler = new InputHandler();
     private final JFrame frame = new JFrame();
@@ -63,9 +65,12 @@ public class Engine extends Canvas implements Runnable {
             lastTime = now;
 
             while (delta >= 1){
+                Scene currentScene = handler.getCurrentScene();
+                String t = currentScene.title;
                 // Update logic here
 
                 handler.update();
+                frame.setTitle(t);
 
                 delta--;
             }
@@ -74,7 +79,7 @@ public class Engine extends Canvas implements Runnable {
             frames++;
 
             while (System.currentTimeMillis() - lastTimer > 1000) {
-                System.out.println(frames + " frames");
+                CURRENT_FPS = frames;
                 lastTimer += 1000;
                 frames = 0;
             }
@@ -94,4 +99,7 @@ public class Engine extends Canvas implements Runnable {
         g2d.dispose();
         bs.show();
     }
+
+
+
 }

@@ -8,25 +8,18 @@ import engine.actors.Entity;
 import engine.geometry.Shape;
 import engine.systems.Scene;
 import engine.geometry.ConvexPolygon;
-import engine.core.Engine;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
-import javax.sound.sampled.Clip;
-
 public class Player extends Entity {
     private static final int ROTATION_SPEED = 4;
     private static final double THRUST = 0.17;
-    
-    private final double shootCooldown;
+
     private double cooldownTick = 0;
 
     public Player(Scene scene) {
         super(scene,"Player");
-        Clip clip = scene.getSound("fire");
-        shootCooldown = (double) clip.getFrameLength() / clip.getFormat().getSampleRate();
-        System.out.println(shootCooldown);
     }
 
     @Override
@@ -47,8 +40,9 @@ public class Player extends Entity {
         }
 
         cooldownTick -= 1;
-        cooldownTick = Math.clamp(cooldownTick, 0, shootCooldown*Engine.FPS);
-        System.out.println(cooldownTick);
+        if (cooldownTick <= 0) {
+            cooldownTick = 0;
+        }
     }
 
     @Override
@@ -73,12 +67,11 @@ public class Player extends Entity {
     }
 
     private void fireLaser() {
-        cooldownTick = shootCooldown * Engine.FPS;
-        
-
         Vector2 vertex = shape.getVertex(0);
         scene.instantiate(new Laser(scene, vertex.x, vertex.y, direction));
         scene.playSound("fire");
+
+        cooldownTick = 26;
     }
 
     @Override
